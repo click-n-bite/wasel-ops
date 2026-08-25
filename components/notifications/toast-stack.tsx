@@ -23,7 +23,7 @@ export function ToastStack() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed bottom-5 right-5 z-[100] flex flex-col gap-2 w-80 pointer-events-none">
+    <div className="fixed bottom-5 left-5 z-[100] flex flex-col gap-2 w-80 pointer-events-none">
       {toasts.slice(-4).map((t) => {
         const meta = TYPE_META[t.type];
         const Icon = meta.icon;

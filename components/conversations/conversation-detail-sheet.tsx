@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { CheckCircle2, Package, Send } from "lucide-react";
 import { Conversation, ConversationStatus } from "@/lib/types";
 import { STATUS_META, STATUS_ORDER } from "@/lib/status-meta";
@@ -20,6 +20,29 @@ export function ConversationDetailSheet({
   const sendReply = useDashboardStore((s) => s.sendAgentReply);
   const typingConversationId = useDashboardStore((s) => s.typingConversationId);
   const connected = useDashboardStore((s) => s.connected);
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [conversation?.messages]);
+
+  useEffect(() => {
+    if (conversation) {
+      scrollToBottom();
+    }
+  }, [conversation?.id]);
+
+  // Scroll when typing appears
+  useEffect(() => {
+    if (typingConversationId === conversation?.id) {
+      scrollToBottom();
+    }
+  }, [typingConversationId]);
 
   if (!conversation) return null;
   const meta = STATUS_META[conversation.status];
@@ -95,6 +118,8 @@ export function ConversationDetailSheet({
               </div>
             </div>
           )}
+          {/* Scroll anchor */}
+          <div ref={messagesEndRef} />
         </div>
 
         <div className="p-4 border-t border-border space-y-3 shrink-0">

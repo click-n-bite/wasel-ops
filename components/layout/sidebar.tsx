@@ -18,7 +18,7 @@ const NAV_ITEMS = [
   { href: "/conversations", label: "Conversations", icon: MessageSquare },
   { href: "/services", label: "Services", icon: Settings2 },
   { href: "/users", label: "Users", icon: Users },
-  { href: "/blacklist", label: "Blacklisted Countries", icon: Globe2 },
+  // { href: "/blacklist", label: "Blacklisted Countries", icon: Globe2 },
   { href: "/notifications", label: "Support Numbers", icon: Bell },
 ];
 
